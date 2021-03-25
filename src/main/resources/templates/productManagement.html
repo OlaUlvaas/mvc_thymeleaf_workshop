@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Panel</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+        nav{
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+<nav th:insert="fragments/navbar :: nav_fragment"></nav>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Ola</td>
+            <td>$20</td>
+            <td><a href="#" class="btn btn-info">Details</a></td>
+            <td><a href="#" class="btn btn-warning">Edit</a></td>
+            <td><a href="#" class="btn btn-danger">Delete</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Per</td>
+            <td>$40</td>
+            <td><a href="#" class="btn btn-info">Details</a></td>
+            <td><a href="#" class="btn btn-warning">Edit</a></td>
+            <td><a href="#" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<footer th:insert="fragments/footer :: footer_fragment"></footer>
+
+</body>
+</html>
