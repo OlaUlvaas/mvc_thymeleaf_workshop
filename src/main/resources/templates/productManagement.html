@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Product Panel</title>
+    <title th:text="#{panel.header}"></title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -17,36 +17,56 @@
 <nav th:insert="fragments/navbar :: nav_fragment"></nav>
 
 <div class="container">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Details</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Ola</td>
-            <td>$20</td>
-            <td><a href="#" class="btn btn-info">Details</a></td>
-            <td><a href="#" class="btn btn-warning">Edit</a></td>
-            <td><a href="#" class="btn btn-danger">Delete</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Per</td>
-            <td>$40</td>
-            <td><a href="#" class="btn btn-info">Details</a></td>
-            <td><a href="#" class="btn btn-warning">Edit</a></td>
-            <td><a href="#" class="btn btn-danger">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+
+    <div class="card">
+        <div class="card-header card text-white" style="background-color: #71f0c5">
+            <h2>Product List</h2>
+            <p><a href="#" class="btn btn-secondary">Add Product</a></p>
+        </div>
+        <div class="card-body">
+        </div>
+        <div th:if="${productDtoList.isEmpty()}">
+            No Product Available
+        </div>
+        <div th:unless="${productDtoList.isEmpty()}">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th th:text="#{product.id.label}"></th>
+                    <th th:text="#{product.name.label}"></th>
+                    <th th:text="#{product.price.label}"></th>
+                    <th>Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="productDto : ${productDtoList}">
+                    <td>
+                        <span th:text="${productDto.id}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${productDto.name}"></span>
+                    </td>
+                    <td th:if="${productDto.price <= 70}" >
+                        $<span th:text="${#numbers.formatDecimal(productDto.price, 1, 2)}" style="background-color: #ea4343; font-size: 20px"></span>
+                    <td th:unless="${productDto.price <= 70}">
+                        $<span th:text="${#numbers.formatDecimal(productDto.price, 1, 2)}"></span>
+                    </td>
+                    <td><a href="#" class="btn btn-info">Details</a></td>
+                    <td><a href="#" class="btn btn-warning">Edit</a></td>
+                    <td><a href="#" class="btn btn-danger">Delete</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-danger">Back</a>
+        </div>
+
+
 
 </div>
 
