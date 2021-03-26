@@ -53,7 +53,7 @@
                     <td th:unless="${productDto.price <= 70}">
                         $<span th:text="${#numbers.formatDecimal(productDto.price, 1, 2)}"></span>
                     </td>
-                    <td><a href="#" class="btn btn-info">Details</a></td>
+                    <td><a href="#" class="btn btn-info" th:href="@{/admin/product/find/{id} (id=${productDto.id})}")>Details</a></td>
                     <td><a href="#" class="btn btn-warning">Edit</a></td>
                     <td><a href="#" class="btn btn-danger">Delete</a></td>
                 </tr>

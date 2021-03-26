@@ -3,6 +3,7 @@ package se.lexicon.mvc_thymeleaf_workshop.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.lexicon.mvc_thymeleaf_workshop.dto.ProductDetailsDto;
 import se.lexicon.mvc_thymeleaf_workshop.dto.ProductDto;
@@ -10,6 +11,7 @@ import se.lexicon.mvc_thymeleaf_workshop.dto.ProductDto;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -55,6 +57,18 @@ public class ProductManagementController {
     public String getAll(Model model){
         model.addAttribute("productDtoList", productDtoList);
         return "productManagement";
+    }
+
+    @GetMapping("/find/{id}")
+    public String getProductById(@PathVariable("id") Integer id, Model model){
+        //System.out.println("ID: " + id);
+        Optional<ProductDto> optionalProductDto = productDtoList.stream().filter(productDto -> productDto.getId() == id).findFirst();
+        if(optionalProductDto.isPresent())
+            model.addAttribute("productDto", optionalProductDto.get());
+        else
+            model.addAttribute("productDto", new ProductDto());
+
+        return "adminProductDetails";
     }
 
 
